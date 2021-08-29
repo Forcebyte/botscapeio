@@ -20,4 +20,4 @@ if __name__ == "__main__":
     # TODO: Technically this function waits until the end of runtime before testing to see if someone is holding x down
     while keyboard.is_pressed('x') == False:
         logger.info("Beginning Run")
-        windowManager.__auto_prompt()
+        windowManager.begin_mining_run()
