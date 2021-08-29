@@ -22,3 +22,6 @@ if __name__ == "__main__":
         while keyboard.is_pressed('x') == False:
             logger.info("Beginning Run")
             windowManager.begin_woodcutting_run()
+    else:
+        logger.error(f"{botArguments.botAction.action} is not supported yet, please choose another option")
+        exit(1)

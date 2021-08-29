@@ -3,6 +3,7 @@ from utils import tree
 import pyautogui
 import logging
 import random
+import cv2
 from time import sleep
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -61,7 +62,7 @@ class ScreenManager():
         # First, take a capture of the underlying rs_window (coordinates fetched from preallocate_Runescape_window)
         inventory_not_full = True
         while inventory_not_full:
-            sleep(5)
+            sleep(3)
             logger.info("Taking screenshot")
             rs_screenshot = pyautogui.screenshot(
                 region=(self.rs_window.left, self.rs_window.top, self.rs_window.width, self.rs_window.height)
@@ -69,19 +70,25 @@ class ScreenManager():
             logger.info("Beginning run")
             treeManager = tree.TreeManager(rs_screenshot)
             tree_coordinate_list = treeManager.preallocate_trees()
-            for tree_coord in tree_coordinate_list:
-                clicks = random.randint(1,2)
-                if clicks > 1:
-                    pyautogui.click(
-                        clicks=clicks,
-                        x=(tree_coord[0] + (random.randint(1,30))), 
-                        y=(tree_coord[1] + (random.randint(1,30))),
-                        interval=random.uniform(0.10, 0.25)
-                    )
-                else:
-                    pyautogui.click(
-                        clicks=clicks,
-                        x=(tree_coord[0] + (random.randint(1,30))), 
-                        y=(tree_coord[1] + (random.randint(1,30))),
-                    )
-                break
+
+            tree_coord = random.choice(tree_coordinate_list)
+            max_variance = 3 # dictates the random x/y coordinate where we click on the tree (just in case botting detects thsi)
+            clicks = random.randint(1,2)
+            x_dir, y_dir = (random.randint(1,max_variance) + tree_coord[0]), (random.randint(1,max_variance) + tree_coord[1])
+            # Ensure user is clicking within the runescape window
+            #while (x_dir+tree_coord[0] < self.rs_window.width) and (y_dir+tree_coord[1] < self.rs_window.height):
+                #x_dir, y_dir = (random.randint(1,max_variance) + tree_coord[0]), (random.randint(1,max_variance) + tree_coord[1])
+            print(f"x = {x_dir}, y = {y_dir}")
+            if clicks > 1:
+                pyautogui.click(
+                    clicks=clicks,
+                    x=x_dir,
+                    y=y_dir,
+                    interval=random.uniform(0.10, 0.25)
+                )
+            else:
+                pyautogui.click(
+                    clicks=clicks,
+                    x=x_dir,
+                    y=y_dir,
+                )

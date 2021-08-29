@@ -1,2 +1,5 @@
 .vscode
 bin\utils\__pycache__
+*.pyc
+bin/utils/__pycache__/window.cpython-39.pyc
+bin/utils/__pycache__/tree.cpython-39.pyc

@@ -6,7 +6,6 @@ import pyautogui
 class TreeManager():
     def __init__(self, rs_screenshot):
         self.rs_screenshot = rs_screenshot
-        cv2.imshow('RsBot', cv2.cvtColor(numpy.array(self.rs_screenshot), cv2.COLOR_BGR2RGB))
 
     def preallocate_trees(self):
         tree_array = []
@@ -43,6 +42,8 @@ class TreeManager():
                     tree_coords = self.fetch_tree_coord(raw_rs_screenshot, rectangle, x, y, width, length)
             if tree_coords:
                 tree_array.append(tree_coords)
+        cv2.imshow('RsBot', cv2.cvtColor(raw_rs_screenshot, cv2.COLOR_BGR2RGB))
+        cv2.waitKey(100)
         return(tree_array)
 
     @staticmethod
