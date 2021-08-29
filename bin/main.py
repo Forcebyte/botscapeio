@@ -18,6 +18,7 @@ windowManager = window.ScreenManager(botArguments)
 if __name__ == "__main__":
     # Begin the mining bot, if we detect someone holding 'X' during runtime, return 
     # TODO: Technically this function waits until the end of runtime before testing to see if someone is holding x down
-    while keyboard.is_pressed('x') == False:
-        logger.info("Beginning Run")
-        windowManager.begin_mining_run()
+    if botArguments.botAction.action == 'woodcutting':
+        while keyboard.is_pressed('x') == False:
+            logger.info("Beginning Run")
+            windowManager.begin_woodcutting_run()

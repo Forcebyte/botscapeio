@@ -1,6 +1,6 @@
 pytesseract==0.3.8
 pyautogui==0.9.53
 keyboard=0.13.5
-
+opencv-python==4.5.3.56
 # TODO: There's gotta be a better way to do this in OCR instead of Tensor, but i'm lazy
 tensorflow==2.6.0
