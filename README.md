@@ -1,5 +1,9 @@
 # BotScapeo - RuneScape Woodcutting/FireMaking Level Bot
 
+<p align="center">
+  <img width="460" height="300" src="https://raw.githubusercontent.com/Forcebyte/botscapeio/main/src/img1.png">
+</p>
+
 BotScapeo is a client for automated leveling bots created for all RuneScape versions with a focus on OSRS
 
 ---
@@ -29,4 +33,4 @@ python3 main.py
 ```
 
 PyAutoGUI will take care of most of the prompting, window maintainence - simply press on the leveling you'd like to accomplish and relax!
-![sample screenshot](https://github.com/Forcebyte/scapio/raw/src/img1.png)
+
