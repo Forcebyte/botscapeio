@@ -12,15 +12,6 @@ class ScreenManager():
     def __init__(self, botArguments):
         # Fetch botAction requested
         self.botAction = botArguments.botAction
-        # Fetch the dimenisons of the screen that we're runing in, along with current position of the mouse
-        screen_width, screen_height = pyautogui.size()
-        coords = pyautogui.position()
-        mouseCoords = {
-            'x': coords[0],
-            'y': coords[1]
-        }
-        # Confirm that runescape window is focused before running commands
-        self.__auto_prompt(text="Confirm that Runescape Window is focused")
         self.rs_window = self.preallocate_runescape_window()
 
     @staticmethod
@@ -47,10 +38,9 @@ class ScreenManager():
     def preallocate_runescape_window(self):
         try:
             rs_window = pyautogui.getWindowsWithTitle("Old School RuneScape")[0]
-            print(rs_window)
         except IndexError as err:
-            raise pyautogui.FailSafeException("Unable to locate 'Old School Runescape' window, ensure that OSRS is running")
-        print(f"height={rs_window.height}, 'width={rs_window.width}")
+            raise pyautogui.FailSafeException(f"Unable to locate 'Old School Runescape' window  err {err}, ensure that OSRS is running")
+        logger.debug(f"height={rs_window.height}, 'width={rs_window.width}")
         # Reset height and width to simple values
         logger.info("Setting default Height and Width of OSRS window...")
         rs_window.width=1065
@@ -63,7 +53,7 @@ class ScreenManager():
         inventory_not_full = True
         while inventory_not_full:
             sleep(3)
-            logger.info("Taking screenshot")
+            logger.debug("Taking screenshot")
             rs_screenshot = pyautogui.screenshot(
                 region=(self.rs_window.left, self.rs_window.top, self.rs_window.width, self.rs_window.height)
             )
@@ -75,10 +65,6 @@ class ScreenManager():
             max_variance = 3 # dictates the random x/y coordinate where we click on the tree (just in case botting detects thsi)
             clicks = random.randint(1,2)
             x_dir, y_dir = (random.randint(1,max_variance) + tree_coord[0]), (random.randint(1,max_variance) + tree_coord[1])
-            # Ensure user is clicking within the runescape window
-            #while (x_dir+tree_coord[0] < self.rs_window.width) and (y_dir+tree_coord[1] < self.rs_window.height):
-                #x_dir, y_dir = (random.randint(1,max_variance) + tree_coord[0]), (random.randint(1,max_variance) + tree_coord[1])
-            print(f"x = {x_dir}, y = {y_dir}")
             if clicks > 1:
                 pyautogui.click(
                     clicks=clicks,
@@ -92,3 +78,4 @@ class ScreenManager():
                     x=x_dir,
                     y=y_dir,
                 )
+            inventory_not_full = treeManager.clean_inventory()

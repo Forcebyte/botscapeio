@@ -1,5 +1,4 @@
 from utils import parser, window
-import os, sys
 import logging
 import keyboard
 from time import sleep

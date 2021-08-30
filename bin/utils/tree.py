@@ -1,12 +1,21 @@
-from PIL import ImageGrab
 import cv2
 import numpy
 import pyautogui
+import logging
+import random
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 class TreeManager():
     def __init__(self, rs_screenshot):
         self.rs_screenshot = rs_screenshot
-
+        # Fetch all items within users inventory
+        self.tinderbox = [tinder for tinder in pyautogui.locateAllOnScreen('tinder.png', confidence=0.8)]
+        self.logs = [log
+            for log in pyautogui.locateAllOnScreen('logs.png', confidence=0.8)
+                if 550 <= log[0] <= 740]
+        self.inventory_capacity = 28
     def preallocate_trees(self):
         tree_array = []
         # Convert image to wireframe (faster processing)
@@ -59,3 +68,17 @@ class TreeManager():
 
         x, y = pyautogui.center(rect)
         return(x, y)
+
+    def clean_inventory(self):
+        tinderbox_coordinates_x, tinderbox_coordinates_y = pyautogui.center(self.tinderbox[0])
+        if len(self.logs) > self.inventory_capacity:
+            logger.info("Inventory capacity reached, beginning to drop obtained inv")
+            for log_coordinate_list in self.logs:
+                log_x, log_y = pyautogui.center(log_coordinate_list)
+                # Click on the log
+                pyautogui.moveTo(log_x, log_y)
+                pyautogui.click(log_x, log_y)
+                # Click on the Tinderbox
+                pyautogui.moveTo(tinderbox_coordinates_x, tinderbox_coordinates_y)
+                pyautogui.click(tinderbox_coordinates_x, tinderbox_coordinates_y)
+                cv2.waitKey(random.randint(500,1000))

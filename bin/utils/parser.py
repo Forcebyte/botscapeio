@@ -1,6 +1,6 @@
 import os
 import logging
-import cli_ui
+import pyautogui
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -33,5 +33,5 @@ class ScrapingArguments():
         if os.environ.get('action'):
             botActions.action = os.environ.get('action')
         else:
-            botActions.action = cli_ui.ask_choice("Choose a botting action to take", choices=actions)
+            botActions.action = pyautogui.confirm("Choose a botting action to take", buttons=actions)
 
