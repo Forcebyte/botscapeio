@@ -1,6 +1,6 @@
-# Scapio - RuneScape Woodcutting/FireMaking Level Bot
+# BotScapeo - RuneScape Woodcutting/FireMaking Level Bot
 
-Scapio is a client for automated leveling bots created for all RuneScape versions with a focus on OSRS
+BotScapeo is a client for automated leveling bots created for all RuneScape versions with a focus on OSRS
 
 ---
 
