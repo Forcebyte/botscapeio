@@ -25,9 +25,9 @@ jobs:
         uses: sunnysid3up/python-linter@v0.1-beta.7
         with:
           # Source file or directory
-          source: utils # optional, default is .
+          source: bin # optional, default is .
           # Set strictness for lint [low, medium, high]
-          strict: high # optional, default is medium
+          strict: medium # optional, default is medium
           # Mypy options
           mypy-options: # optional, default is 
           # Pylint options
