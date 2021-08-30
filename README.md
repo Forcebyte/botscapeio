@@ -1,4 +1,4 @@
-# BotScapeo - RuneScape Woodcutting/FireMaking Level Bot
+# BotScapeo - RuneScape Leveling Bot
 
 <p align="center">
   <img width="460" height="300" src="https://raw.githubusercontent.com/Forcebyte/botscapeio/main/src/img1.png">
